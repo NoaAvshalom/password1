@@ -1,36 +1,29 @@
+import './App.css';
 import { useState } from 'react';
 import Password from './Password';
-import './App.css';
-
 
 
 function App() {
-
-  const[isable,setisable]=useState(true)
-  const [input, setInput] = useState("");
-  function handleChange(e){
-   setInput(e.target.value) ///מכניס ערך לתוך האינפוט
+  const [password ,setPassword] = useState('')
+  const [preventSubmit,setPreventSubmit]= useState(true)
+  
+  
+  function handlePassword(event){
+    setPassword(event.target.value)
   }
-  function handlesetisable(x){
-    setisable(x)
-  }
-  //<p>password {input}</p>  
+   
   return (
     <div className="App">
       <h1>Welcome</h1>  
       <p><h3>Please enter password:</h3></p>
-      <input type = "string" value = {input} onChange = {handleChange}/>
+      <input tayp = "password" value = {password} onChange = {handlePassword} />
+      <button disabled= {preventSubmit}> Submit</button>
+      <Password password={password} prevent={setPreventSubmit}></Password>
 
-      <button  disabled={isable} >Submit</button> 
-      
-      <Password input={input} handlesetisable={handlesetisable}/>
       
 
     </div>
   );
 }
-
-
-
   
-  export default App;
+export default App;

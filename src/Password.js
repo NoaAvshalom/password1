@@ -1,31 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 
 function Password(props) {
   
-  const {input,handlesetisable} = props;
-  const[Strange,setStrange] = useState("");
+  const {password,prevent} = props;
+  const[message,setMessage] = useState('weak');
 
   useEffect(()=>{
-    if(input.length <=2){
-        setStrange("Short password")
-        handlesetisable(true)
+    if(password.length <=2){
+        setMessage("weak")
+        prevent(true)
       }
-      else if(input.length <=6){
-        setStrange("Medium password")
-        handlesetisable(false)
+      else if(password.length >2 && password.length<=6){
+        setMessage("Medium")
+        prevent(false)
       }
-      else{setStrange("Strong password")}
-      handlesetisable(false)
-  } ,[setStrange,input,handlesetisable])
+      else{
+        setMessage("Strong ")
+        prevent(false)
+  }
+} ,[password, prevent])
  
  
  
   return (
-    <div>
-    <h3>the password is{Strange} </h3>
-   
-    </div>
+    <p> {message} </p>
+
   );
 
 }
